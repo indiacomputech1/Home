@@ -161,25 +161,29 @@ navLinks.forEach(link => {
 // Replace this URL with your Google Apps Script Web App URL
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxe8P5OsRzUXJo-Yd2WO3enD2z3Am_m4CGWVqP84uFO7ZVKmCq85QV-7UbyG_ZT_SM/exec';
 
-const contactForm = document.getElementById('contactForm');
-const submitBtn = document.getElementById('submitBtn');
+// Attach Google Sheets handler to all contact forms
+const contactForms = document.querySelectorAll('form[data-contact=\"true\"]');
 
-if (contactForm && submitBtn) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const originalText = submitBtn.textContent;
-        const originalBg = submitBtn.style.background;
-        
-        // Disable button and show loading
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        submitBtn.style.opacity = '0.7';
-        submitBtn.style.cursor = 'not-allowed';
-        
-        try {
-            // Helper function to format service names
-            function formatServiceName(service) {
+if (contactForms.length) {
+    contactForms.forEach((contactForm) => {
+        const submitBtn = contactForm.querySelector('button[type=\"submit\"], .btn-primary');
+        if (!submitBtn) return;
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const originalText = submitBtn.textContent;
+            const originalBg = submitBtn.style.background;
+            
+            // Disable button and show loading
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.opacity = '0.7';
+            submitBtn.style.cursor = 'not-allowed';
+            
+            try {
+                // Helper function to format service names
+                function formatServiceName(service) {
                 if (!service) return '';
                 
                 // Map of service values to proper display names
@@ -205,8 +209,8 @@ if (contactForm && submitBtn) {
                 ).join(' ');
             }
             
-            // Get form data
-            const formData = new FormData(contactForm);
+                // Get form data
+                const formData = new FormData(contactForm);
             
             // Convert FormData to URL-encoded format (avoids CORS issues)
             const urlParams = new URLSearchParams();
@@ -226,7 +230,7 @@ if (contactForm && submitBtn) {
             urlParams.append('message', formData.get('message') || '');
             urlParams.append('timestamp', new Date().toISOString());
             
-            console.log('Sending data to Google Sheets:', Object.fromEntries(urlParams));
+                console.log('Sending data to Google Sheets:', Object.fromEntries(urlParams));
             
             // Convert to URL-encoded string
             const urlEncodedData = urlParams.toString();
@@ -234,11 +238,11 @@ if (contactForm && submitBtn) {
             
             // Use XMLHttpRequest for better compatibility with deployed sites
             // URL-encoded format doesn't trigger CORS preflight requests
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', scriptURL, true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-            
-            xhr.onload = function() {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', scriptURL, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                
+                xhr.onload = function() {
                 console.log('Response status:', xhr.status);
                 console.log('Response text:', xhr.responseText);
                 
@@ -310,9 +314,9 @@ if (contactForm && submitBtn) {
                         submitBtn.disabled = false;
                     }, 3000);
                 }
-            };
-            
-            xhr.onerror = function() {
+                };
+                
+                xhr.onerror = function() {
                 console.error('Network error occurred');
                 submitBtn.textContent = 'Error - Try Again';
                 submitBtn.style.background = '#dc3545';
@@ -326,9 +330,9 @@ if (contactForm && submitBtn) {
                     submitBtn.style.background = originalBg;
                     submitBtn.disabled = false;
                 }, 3000);
-            };
-            
-            xhr.ontimeout = function() {
+                };
+                
+                xhr.ontimeout = function() {
                 console.error('Request timeout after 30 seconds');
                 console.error('This usually means:');
                 console.error('1. Google Apps Script is not responding');
@@ -353,35 +357,35 @@ if (contactForm && submitBtn) {
                     submitBtn.style.background = originalBg;
                     submitBtn.disabled = false;
                 }, 3000);
-            };
-            
-            // Set timeout to 30 seconds (Google Apps Script can be slow on first run)
-            xhr.timeout = 30000;
-            
-            console.log('Sending request to:', scriptURL);
-            console.log('Request data (URL-encoded):', urlEncodedData);
-            
-            // Send the request as URL-encoded (no CORS issues)
-            xhr.send(urlEncodedData);
-            
-            console.log('Request sent, waiting for response...');
-            
-        } catch (error) {
-            console.error('Error sending message:', error);
-            submitBtn.textContent = 'Error - Try Again';
-            submitBtn.style.background = '#dc3545';
-            submitBtn.style.opacity = '1';
-            submitBtn.style.cursor = 'pointer';
-            
-            // Show error alert
+                };
+                
+                // Set timeout to 30 seconds (Google Apps Script can be slow on first run)
+                xhr.timeout = 30000;
+                
+                console.log('Sending request to:', scriptURL);
+                console.log('Request data (URL-encoded):', urlEncodedData);
+                
+                // Send the request as URL-encoded (no CORS issues)
+                xhr.send(urlEncodedData);
+                
+                console.log('Request sent, waiting for response...');
+                
+            } catch (error) {
+                console.error('Error sending message:', error);
+                submitBtn.textContent = 'Error - Try Again';
+                submitBtn.style.background = '#dc3545';
+                submitBtn.style.opacity = '1';
+                submitBtn.style.cursor = 'pointer';
+                
                 showErrorModal('Sorry, there was an error sending your message. Please try again or contact us directly at indiacomputech1@gmail.com');
-            
-            setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = originalBg;
-                submitBtn.disabled = false;
-            }, 3000);
-        }
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = originalBg;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
     });
 }
 
