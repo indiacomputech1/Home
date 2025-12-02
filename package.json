@@ -1,0 +1,13 @@
+{
+  "name": "india-computech",
+  "version": "1.0.0",
+  "description": "India CompuTech Website",
+  "scripts": {
+    "dev": "npx http-server -p 3000 -o",
+    "start": "npx http-server -p 3000 -o"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
