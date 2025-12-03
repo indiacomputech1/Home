@@ -35,9 +35,63 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background"></div>
+        <div class="hero-background">
+            <!-- Floating Elements -->
+            <div class="hero-float hero-float-1">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="hero-float hero-float-2">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="hero-float hero-float-3">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="hero-float hero-float-4">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                    <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </div>
+            <div class="hero-float hero-float-5">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="hero-float hero-float-6">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" fill="currentColor"/>
+                </svg>
+            </div>
+        </div>
         <div class="container">
             <div class="hero-content">
+                <!-- Quick Stats Pills -->
+                <div class="hero-stats">
+                    <div class="hero-stat-pill">
+                        <span class="stat-icon">🏆</span>
+                        <span>15+ Years</span>
+                    </div>
+                    <div class="hero-stat-pill">
+                        <span class="stat-icon">🚀</span>
+                        <span>99.9% Uptime</span>
+                    </div>
+                    <div class="hero-stat-pill">
+                        <span class="stat-icon">💼</span>
+                        <span>50+ Clients</span>
+                    </div>
+                </div>
+                
                 <h1 class="hero-title">India CompuTech</h1>
                 <h2 class="hero-tagline">Strong systems. Strong outcomes.</h2>
                 <p class="hero-subtitle">
@@ -47,6 +101,14 @@
                 <div class="hero-buttons">
                     <a href="contact.html" class="btn btn-primary">Book an Assessment Call</a>
                     <a href="services.html" class="btn btn-secondary">Explore Services</a>
+                </div>
+                
+                <!-- Key Features Pills -->
+                <div class="hero-features">
+                    <span class="feature-badge">24/7 Support</span>
+                    <span class="feature-badge">Enterprise Security</span>
+                    <span class="feature-badge">Scalable Solutions</span>
+                    <span class="feature-badge">AI-Powered</span>
                 </div>
             </div>
         </div>
@@ -201,25 +263,160 @@
             <div class="testimonials-grid">
                 <article class="testimonial-card fade-in-up">
                     <p class="testimonial-quote">
-                        “India CompuTech helped us stabilise our IT and cut unplanned downtime by over 40%.”
+                        "India CompuTech helped us stabilise our IT and cut unplanned downtime by over 40%."
                     </p>
                     <p class="testimonial-name">Rahul Mehta</p>
                     <p class="testimonial-role">COO, Aurora Retail</p>
                 </article>
                 <article class="testimonial-card fade-in-up" style="animation-delay: 0.1s;">
                     <p class="testimonial-quote">
-                        “Their cloud and security team gives us the confidence to scale without worrying about infra.”
+                        "Their cloud and security team gives us the confidence to scale without worrying about infra."
                     </p>
                     <p class="testimonial-name">Neha Saini</p>
                     <p class="testimonial-role">Head of Technology, Skyline Logistics</p>
                 </article>
                 <article class="testimonial-card fade-in-up" style="animation-delay: 0.2s;">
                     <p class="testimonial-quote">
-                        “Clear documentation, predictable delivery, and rock-solid support – exactly what we needed.”
+                        "Clear documentation, predictable delivery, and rock-solid support – exactly what we needed."
                     </p>
                     <p class="testimonial-name">Arjun Rao</p>
                     <p class="testimonial-role">IT Director, Vertex Finance</p>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Service Selector -->
+    <section class="service-selector">
+        <div class="container">
+            <h2 class="section-title fade-in">Not sure which service you need?</h2>
+            <p class="section-description fade-in">Answer 3 quick questions to find your perfect solution</p>
+            
+            <div class="selector-container">
+                <div class="selector-question active" data-question="1">
+                    <h3 class="selector-question-title">What are your primary challenges? <span class="select-hint">(Select all that apply)</span></h3>
+                    <div class="selector-options">
+                        <button class="selector-option" data-answer="infrastructure">
+                            <div class="option-checkbox"></div>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 17L12 22L22 17M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Unstable Infrastructure</span>
+                        </button>
+                        <button class="selector-option" data-answer="security">
+                            <div class="option-checkbox"></div>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 8H20C21.1 8 22 8.9 22 10V20C22 21.1 21.1 22 20 22H4C2.9 22 2 21.1 2 20V10C2 8.9 2.9 8 4 8H6V6C6 3.79 7.79 2 10 2H14C16.21 2 18 3.79 18 6V8Z" fill="currentColor"/>
+                            </svg>
+                            <span>Security Concerns</span>
+                        </button>
+                        <button class="selector-option" data-answer="cloud">
+                            <div class="option-checkbox"></div>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19.36 10.04C18.67 6.59 15.64 4 12 4C9.11 4 6.6 5.64 5.35 8.04C2.34 8.36 0 10.91 0 14C0 17.31 2.69 20 6 20H19C21.76 20 24 17.76 24 15C24 12.36 21.95 10.22 19.36 10.04Z" fill="currentColor"/>
+                            </svg>
+                            <span>Cloud Migration</span>
+                        </button>
+                        <button class="selector-option" data-answer="automation">
+                            <div class="option-checkbox"></div>
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                            <span>Manual Processes</span>
+                        </button>
+                    </div>
+                    <div class="question-actions">
+                        <button class="btn-next" onclick="nextQuestion()">
+                            Next
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="selector-question" data-question="2">
+                    <h3 class="selector-question-title">What's your team size?</h3>
+                    <div class="selector-options">
+                        <button class="selector-option" data-answer="small">
+                            <span class="option-emoji">👤</span>
+                            <span>1-20 people</span>
+                        </button>
+                        <button class="selector-option" data-answer="medium">
+                            <span class="option-emoji">👥</span>
+                            <span>21-100 people</span>
+                        </button>
+                        <button class="selector-option" data-answer="large">
+                            <span class="option-emoji">👨‍👩‍👧‍👦</span>
+                            <span>100+ people</span>
+                        </button>
+                    </div>
+                    <div class="question-actions">
+                        <button class="btn-previous" onclick="previousQuestion()">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Previous
+                        </button>
+                        <button class="btn-next" onclick="nextQuestion()">
+                            Next
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="selector-question" data-question="3">
+                    <h3 class="selector-question-title">What's your timeline?</h3>
+                    <div class="selector-options">
+                        <button class="selector-option" data-answer="urgent">
+                            <span class="option-emoji">🚨</span>
+                            <span>Immediate (within weeks)</span>
+                        </button>
+                        <button class="selector-option" data-answer="soon">
+                            <span class="option-emoji">📅</span>
+                            <span>Soon (1-3 months)</span>
+                        </button>
+                        <button class="selector-option" data-answer="planning">
+                            <span class="option-emoji">📊</span>
+                            <span>Planning (3+ months)</span>
+                        </button>
+                    </div>
+                    <div class="question-actions">
+                        <button class="btn-previous" onclick="previousQuestion()">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Previous
+                        </button>
+                        <button class="btn-next" onclick="showResultFromQuestion3()">
+                            See Results
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="selector-result" id="selectorResult">
+                    <div class="result-icon">✅</div>
+                    <h3 class="result-title">We recommend:</h3>
+                    <p class="result-service" id="resultService"></p>
+                    <p class="result-description" id="resultDescription"></p>
+                    <div class="result-actions">
+                        <a href="contact.html" class="btn btn-primary">Schedule Assessment</a>
+                        <button class="btn btn-secondary" onclick="resetSelector()">Start Over</button>
+                    </div>
+                </div>
+
+                <div class="selector-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">Question <span id="currentQuestion">1</span> of 3</div>
+                </div>
             </div>
         </div>
     </section>
