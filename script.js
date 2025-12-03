@@ -649,8 +649,231 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Service Selector Quiz
+let currentQuestion = 1;
+const answers = {};
+
+function initServiceSelector() {
+    const options = document.querySelectorAll('.selector-option');
+    
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const answer = option.getAttribute('data-answer');
+            const questionNum = option.closest('.selector-question').getAttribute('data-question');
+            
+            // Question 1 allows multiple selections
+            if (questionNum === '1') {
+                // Toggle selection
+                option.classList.toggle('selected');
+                
+                // Store multiple answers
+                if (!answers.q1) {
+                    answers.q1 = [];
+                }
+                
+                if (option.classList.contains('selected')) {
+                    if (!answers.q1.includes(answer)) {
+                        answers.q1.push(answer);
+                    }
+                } else {
+                    answers.q1 = answers.q1.filter(a => a !== answer);
+                }
+            } else {
+                // Questions 2 and 3 are single selection
+                // Remove selection from all options in this question
+                const questionOptions = option.closest('.selector-question').querySelectorAll('.selector-option');
+                questionOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Select this option
+                option.classList.add('selected');
+                
+                // Store answer
+                answers[`q${questionNum}`] = answer;
+            }
+        });
+    });
+}
+
+function nextQuestion() {
+    const currentQ = currentQuestion;
+    
+    // Validate that at least one answer is selected
+    if (currentQ === 1 && (!answers.q1 || answers.q1.length === 0)) {
+        alert('Please select at least one challenge');
+        return;
+    }
+    if (currentQ === 2 && !answers.q2) {
+        alert('Please select your team size');
+        return;
+    }
+    
+    if (currentQuestion < 3) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+        updateProgress();
+    }
+}
+
+function previousQuestion() {
+    if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+        updateProgress();
+    }
+}
+
+function showResultFromQuestion3() {
+    // Validate question 3
+    if (!answers.q3) {
+        alert('Please select your timeline');
+        return;
+    }
+    showResult();
+}
+
+// Make functions available globally
+window.nextQuestion = nextQuestion;
+window.previousQuestion = previousQuestion;
+window.showResultFromQuestion3 = showResultFromQuestion3;
+
+function showQuestion(num) {
+    const questions = document.querySelectorAll('.selector-question');
+    questions.forEach(q => q.classList.remove('active'));
+    
+    const targetQuestion = document.querySelector(`.selector-question[data-question="${num}"]`);
+    if (targetQuestion) {
+        targetQuestion.classList.add('active');
+    }
+    
+    document.getElementById('currentQuestion').textContent = num;
+}
+
+function updateProgress() {
+    const progressFill = document.getElementById('progressFill');
+    const progress = (currentQuestion / 3) * 100;
+    if (progressFill) {
+        progressFill.style.width = progress + '%';
+    }
+}
+
+function showResult() {
+    // Hide all questions
+    document.querySelectorAll('.selector-question').forEach(q => q.classList.remove('active'));
+    
+    // Hide progress
+    const progress = document.querySelector('.selector-progress');
+    if (progress) progress.style.display = 'none';
+    
+    // Determine recommendation based on answers
+    const recommendation = getRecommendation(answers);
+    
+    // Show result
+    const resultDiv = document.getElementById('selectorResult');
+    const resultService = document.getElementById('resultService');
+    const resultDescription = document.getElementById('resultDescription');
+    
+    if (resultService) resultService.textContent = recommendation.service;
+    if (resultDescription) resultDescription.textContent = recommendation.description;
+    if (resultDiv) resultDiv.classList.add('active');
+}
+
+function getRecommendation(answers) {
+    const challenges = Array.isArray(answers.q1) ? answers.q1 : [answers.q1];
+    const teamSize = answers.q2;
+    const timeline = answers.q3;
+    
+    const recommendations = {
+        infrastructure: {
+            service: 'IT Infrastructure Design & Optimization',
+            description: 'We\'ll stabilize your systems, reduce downtime, and build a foundation that scales with your business.',
+            priority: 0
+        },
+        security: {
+            service: 'Backup & Security Solutions',
+            description: 'Comprehensive security assessments, threat monitoring, and automated backup solutions to protect your business.',
+            priority: 0
+        },
+        cloud: {
+            service: 'Cloud Infrastructure Services',
+            description: 'Seamless cloud migration with ongoing management, cost optimization, and 24/7 support.',
+            priority: 0
+        },
+        automation: {
+            service: 'AI-Driven Digital Solutions',
+            description: 'Automate repetitive tasks, streamline workflows, and leverage AI to boost productivity.',
+            priority: 0
+        }
+    };
+    
+    // Count priorities based on selections
+    challenges.forEach(challenge => {
+        if (recommendations[challenge]) {
+            recommendations[challenge].priority++;
+        }
+    });
+    
+    // Find highest priority recommendation
+    let topRecommendation = recommendations.infrastructure;
+    let maxPriority = 0;
+    
+    Object.values(recommendations).forEach(rec => {
+        if (rec.priority > maxPriority) {
+            maxPriority = rec.priority;
+            topRecommendation = rec;
+        }
+    });
+    
+    // If multiple challenges selected, create custom description
+    if (challenges.length > 1) {
+        const serviceNames = challenges.map(c => {
+            const recs = {
+                infrastructure: 'Infrastructure Optimization',
+                security: 'Security & Backup',
+                cloud: 'Cloud Migration',
+                automation: 'AI & Automation'
+            };
+            return recs[c] || c;
+        }).join(', ');
+        
+        return {
+            service: 'Comprehensive IT Solutions Package',
+            description: `Based on your needs (${serviceNames}), we recommend a tailored solution combining our expertise in ${challenges.length} key areas to address all your challenges simultaneously.`
+        };
+    }
+    
+    return topRecommendation;
+}
+
+function resetSelector() {
+    currentQuestion = 1;
+    Object.keys(answers).forEach(key => delete answers[key]);
+    
+    // Clear all selections
+    document.querySelectorAll('.selector-option').forEach(opt => {
+        opt.classList.remove('selected');
+    });
+    
+    // Hide result
+    const resultDiv = document.getElementById('selectorResult');
+    if (resultDiv) resultDiv.classList.remove('active');
+    
+    // Show first question
+    showQuestion(1);
+    
+    // Show progress
+    const progress = document.querySelector('.selector-progress');
+    if (progress) progress.style.display = 'block';
+    
+    // Reset progress bar
+    updateProgress();
+}
+
+// Make resetSelector available globally
+window.resetSelector = resetSelector;
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     initServicesCarousel();
     initServiceBundlesTabs();
+    initServiceSelector();
 });
