@@ -2420,7 +2420,7 @@ img[loading="lazy"].loaded {
 /* Floating Contact Buttons */
 .floating-contact-buttons {
     position: fixed;
-    bottom: 110px;
+    bottom: 30px;
     right: 30px;
     z-index: 999;
     display: flex;
@@ -2489,7 +2489,7 @@ img[loading="lazy"].loaded {
 
 @media (max-width: 768px) {
     .floating-contact-buttons {
-        bottom: 100px;
+        bottom: 20px;
         right: 20px;
     }
     
@@ -3572,21 +3572,27 @@ img[loading="lazy"].loaded {
 
     /* Timeline Extra Small Mobile */
     .timeline-grid {
-        gap: 30px;
+        margin-left: 30px;
+    }
+
+    .timeline-item {
+        gap: 20px;
+        padding-bottom: 35px;
     }
 
     .timeline-number {
-        width: 60px;
-        height: 60px;
-        font-size: 1.6rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 
     .timeline-content h3 {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        line-height: 45px;
     }
 
-    .timeline-content p {
-        font-size: 0.85rem;
+    .delivery-approach-timeline .timeline-grid::before {
+        left: 22px;
     }
 }
 
@@ -3945,32 +3951,53 @@ img[loading="lazy"].loaded {
         margin-top: 10px;
     }
 
-    /* Timeline Mobile Fix */
+    /* Timeline Mobile Fix - Left Aligned */
     .timeline-grid {
         flex-direction: column;
-        gap: 40px;
+        gap: 0;
+        position: relative;
+        padding-left: 0;
+        margin-left: 40px;
     }
 
     .timeline-item {
         flex: none;
-        padding: 20px 0;
+        padding: 0 0 40px 0;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        position: relative;
     }
 
     .timeline-number {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-        margin-bottom: 15px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin: 0;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 2;
+    }
+
+    .timeline-content {
+        flex: 1;
+        text-align: left;
+        padding: 0;
     }
 
     .timeline-content h3 {
         font-size: 1.2rem;
-        margin-bottom: 10px;
+        margin: 0;
+        text-align: left;
+        line-height: 50px;
     }
 
     .timeline-content p {
-        font-size: 0.9rem;
-        padding: 0 20px;
+        font-size: 0.85rem;
+        padding: 0;
+        text-align: left;
+        display: none;
     }
 
     /* Hide horizontal line on mobile */
@@ -3978,20 +4005,15 @@ img[loading="lazy"].loaded {
         display: none;
     }
 
-    /* Add vertical line for mobile */
+    /* Add vertical line for mobile - Through circles */
     .delivery-approach-timeline .timeline-grid::before {
         content: '';
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 2px;
-        height: calc(100% - 100px);
-        background: linear-gradient(180deg, 
-            transparent, 
-            rgba(220, 20, 60, 0.3) 10%, 
-            rgba(220, 20, 60, 0.3) 90%, 
-            transparent
-        );
-        z-index: 0;
+        left: 25px;
+        top: 25px;
+        width: 3px;
+        height: calc(100% - 65px);
+        background: rgba(220, 20, 60, 0.3);
+        z-index: 1;
     }
 }
