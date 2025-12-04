@@ -871,9 +871,50 @@ function resetSelector() {
 // Make resetSelector available globally
 window.resetSelector = resetSelector;
 
+// Initialize Feather Icons
+if (typeof feather !== 'undefined') {
+    feather.replace();
+}
+
+// Initialize AOS (Animate On Scroll)
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        duration: 800,           // Animation duration (ms)
+        easing: 'ease-out-cubic', // Smooth easing
+        once: false,             // Animation happens every time you scroll
+        mirror: true,            // Animate on scroll up too
+        offset: 120,             // Offset from original trigger point
+        delay: 0,                // Delay for all animations
+        anchorPlacement: 'top-bottom', // When to trigger animation
+    });
+}
+
+// Lazy loading images
+document.addEventListener('DOMContentLoaded', function() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    lazyImages.forEach(img => {
+        img.addEventListener('load', function() {
+            this.classList.add('loaded');
+        });
+        
+        // If image is already loaded
+        if (img.complete) {
+            img.classList.add('loaded');
+        }
+    });
+});
+
 // Initialize on DOM load
 document.addEventListener('DOMContentLoaded', () => {
     initServicesCarousel();
     initServiceBundlesTabs();
     initServiceSelector();
+    
+    // Refresh AOS after dynamic content loads
+    if (typeof AOS !== 'undefined') {
+        setTimeout(() => {
+            AOS.refresh();
+        }, 500);
+    }
 });
